@@ -13,12 +13,12 @@ export default class PostMemoryRepository implements iPostRepository
 
     private findPostIndexById(id:string):number
     {
-        return this.posts.findIndex((p:iPost)=> p.id === id)
+        return this.posts.findIndex((post:iPost)=> post.id === id)
     }
 
     private findPostIndexByTitle(id:string):number
     {
-        return this.posts.findIndex((p:iPost)=> p.id === id)
+        return this.posts.findIndex((post:iPost)=> post.id === id)
     }
 
     private findAllPostsIndexByOwner(owner:string)
@@ -32,12 +32,6 @@ export default class PostMemoryRepository implements iPostRepository
         indexes.sort()
         indexes.reverse()
         return indexes
-    }
-
-    clean():void
-    {
-        this.postCount = 0
-        this.posts = []
     }
 
     getPosts():iPost[]

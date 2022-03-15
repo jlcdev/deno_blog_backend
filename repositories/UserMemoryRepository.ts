@@ -14,12 +14,12 @@ export default class UserMemoryRepository implements iUserRepository, iFunCrypto
 
     private findUserIndexById(id:string):number
     {
-        return this.users.findIndex((u:iUser)=> u.id === id)
+        return this.users.findIndex((user:iUser)=> user.id === id)
     }
 
     private findUserIndexByEmail(email:string):number
     {
-        return this.users.findIndex((u:iUser)=> u.email === email)
+        return this.users.findIndex((user:iUser)=> user.email === email)
     }
 
     checkUserExist(user_id:string):boolean
@@ -28,13 +28,6 @@ export default class UserMemoryRepository implements iUserRepository, iFunCrypto
         if(index < 0) return false
         return true
     }
-
-    clean():void
-    {
-        this.userCount = 0
-        this.users = []
-    }
-
     getUserById(id: string): iUser|null
     {
         const index = this.findUserIndexById(id)

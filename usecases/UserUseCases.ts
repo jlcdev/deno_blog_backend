@@ -5,7 +5,7 @@ import iUserRepository from "../interfaces/iUserRepository.ts"
 
 
 /*
-    USE CASE: As a user I want to be my user profile
+    USE CASE: As a user I want to get my user profile
     email: string
     password: string *not encrypted
     UserRepository: iUserRepository

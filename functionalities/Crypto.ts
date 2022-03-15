@@ -6,12 +6,12 @@ import { Bcrypt } from '../deps.ts'
 export default class Crypto implements iFunCrypto
 {
     private secret:string
-    private passwordSalt:number
+    private salt:any
     private cryptoInfo:iFunCryptoInfo
 
-    constructor(secret:string, passwordSalt:number = 8, cryptoInfo:iFunCryptoInfo){
+    constructor(secret:string, salt:number = 8, cryptoInfo:iFunCryptoInfo){
         this.secret = secret
-        this.passwordSalt = passwordSalt
+        this.salt = Bcrypt.genSaltSync(salt)
         this.cryptoInfo = cryptoInfo
     }
     private prepare_b64(data:any):string
@@ -25,8 +25,7 @@ export default class Crypto implements iFunCrypto
 
     hashPassword(password: string):string
     {
-        const salt = Bcrypt.genSaltSync(this.passwordSalt)
-        const hashedPassword = Bcrypt.hashSync(password, salt)
+        const hashedPassword = Bcrypt.hashSync(password, this.salt)
         return hashedPassword
     }
     verifyPassword(password: string, hashedPassword: string):boolean
