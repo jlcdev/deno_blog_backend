@@ -1,5 +1,6 @@
 import { Request, Response } from "../deps.ts"
 import iFunCrypto from "../interfaces/iFunCrypto.ts"
+import iFunUtilities from "../interfaces/iFunUtilities.ts"
 import iUser from "../interfaces/iUser.ts"
 import iUserRepository from "../interfaces/iUserRepository.ts"
 import {
@@ -9,7 +10,7 @@ import {
     usecaseUserUpdateProfile
 } from "../usecases/UserUseCases.ts"
 
-export default function mountUserController(userRepository:iUserRepository, crypto:iFunCrypto):any
+export default function mountUserController(userRepository:iUserRepository, crypto:iFunCrypto, utilities: iFunUtilities):any
 {
     function extractTokenPayload(req: Request):any
     {
@@ -46,7 +47,7 @@ export default function mountUserController(userRepository:iUserRepository, cryp
         login: async function(req:Request, res:Response){
             const body = await getBody(req)
             try {
-                const token:string = await usecaseUserLogin(body.email, body.password, userRepository, crypto)
+                const token:string = await usecaseUserLogin(body.email, body.password, userRepository, crypto, utilities)
                 return res.status(200).send(JSON.stringify({
                     status: true,
                     token

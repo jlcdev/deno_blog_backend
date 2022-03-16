@@ -1,5 +1,6 @@
 import UseCaseError from "../errors/UseCaseError.ts"
 import iFunCrypto from "../interfaces/iFunCrypto.ts"
+import iFunUtilities from "../interfaces/iFunUtilities.ts"
 import iUser from "../interfaces/iUser.ts"
 import iUserRepository from "../interfaces/iUserRepository.ts"
 
@@ -25,13 +26,11 @@ export function usecaseUserProfile(id:string, userRepository:iUserRepository):iU
     UserRepository: iUserRepository
     FunCripto: iFunCrypto
 */
-export function usecaseUserLogin(email:string|null, password:string|null, userRepository:iUserRepository, crypto:iFunCrypto):Promise<string>
+export function usecaseUserLogin(email:string|null, password:string|null, userRepository:iUserRepository, crypto:iFunCrypto, utilities:iFunUtilities):Promise<string>
 {
     if(email == null || password == null) throw new UseCaseError('Login requires email and password')
     if(password && password.length < 6) throw new UseCaseError('Password is too short')
-    if(email && email.length == 0) throw new UseCaseError('Email is required')
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
-    if(!emailPattern.test(email)) throw new UseCaseError('Email with incorrect format')
+    if(!utilities.validateEmail(email)) throw new UseCaseError('Invalid email')
     const user = userRepository.getUserByEmail(email)
     if(user == null) throw new UseCaseError('User not found')
     if(!crypto.verifyPassword(password, user.password)) throw new UseCaseError('Incorrect password')

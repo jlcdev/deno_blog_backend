@@ -6,6 +6,7 @@ import mountMiddlewares from "./middlewares/middlewares.ts"
 import UserMemoryRepository from "./repositories/UserMemoryRepository.ts"
 import PostMemoryRepository from "./repositories/PostMemoryRepository.ts"
 import Crypto from "./functionalities/Crypto.ts"
+import Utilities from "./functionalities/Utilities.ts"
 
 const env = Deno.env.toObject()
 const TOKEN_SECRET = env.TOKEN_SECRET || 'supersecret'
@@ -15,10 +16,11 @@ const HASH_SALT = parseInt(env.HASH_SALT) || 8
 const userRepository = new UserMemoryRepository()
 const postRepository = new PostMemoryRepository()
 const crypto = new Crypto(TOKEN_SECRET, HASH_SALT, userRepository)
+const utilities = new Utilities()
 
 //Prepare controllers with dependencies
 const M = mountMiddlewares(crypto)
-const userController = mountUserController(userRepository,crypto)
+const userController = mountUserController(userRepository, crypto, utilities)
 const userPostController = mountUserPostController(userRepository, postRepository, crypto)
 const postController = mountPostController(postRepository, crypto)
 
