@@ -29,6 +29,9 @@ export function usecaseUserLogin(email:string|null, password:string|null, userRe
 {
     if(email == null || password == null) throw new UseCaseError('Login requires email and password')
     if(password && password.length < 6) throw new UseCaseError('Password is too short')
+    if(email && email.length == 0) throw new UseCaseError('Email is required')
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+    if(!emailPattern.test(email)) throw new UseCaseError('Email with incorrect format')
     const user = userRepository.getUserByEmail(email)
     if(user == null) throw new UseCaseError('User not found')
     if(!crypto.verifyPassword(password, user.password)) throw new UseCaseError('Incorrect password')
