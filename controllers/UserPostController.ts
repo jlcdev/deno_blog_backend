@@ -3,7 +3,8 @@ import iFunCrypto from "../interfaces/iFunCrypto.ts"
 import iUserRepository from "../interfaces/iUserRepository.ts"
 import iPostRepository from "../interfaces/iPostRepository.ts"
 import {
-    usecaseUserDeleteAccount
+    usecaseUserDeleteAccount,
+    usecaseGetAllInfoFromUser
 } from "../usecases/UserPostUseCases.ts"
 
 export default function mountUserPostController(userRepository:iUserRepository, postRepository:iPostRepository, crypto:iFunCrypto):any
@@ -21,6 +22,15 @@ export default function mountUserPostController(userRepository:iUserRepository, 
             usecaseUserDeleteAccount(payload.sub, userRepository, postRepository)
             return res.status(200).send(JSON.stringify({
                 status: true
+            }))
+        },
+        getAllInformation: function(req: Request, res: Response){
+            const payload = extractTokenPayload(req)
+            const allInfo = usecaseGetAllInfoFromUser(payload.sub, userRepository, postRepository)
+            return res.status(200).send(JSON.stringify({
+                status:true,
+                data: allInfo,
+                date: new Date()
             }))
         }
     }
