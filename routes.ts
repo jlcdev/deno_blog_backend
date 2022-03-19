@@ -32,6 +32,7 @@ api.post('/login', userController.login)
 api.post('/register', userController.register)
 api.get('/users', M.checkJWT, userController.userProfile)
 api.put('/users', M.checkJWT, userController.updateProfile)
+api.get('/user/all', M.checkJWT, userPostController.getAllInformation)
 api.delete('/users', M.checkJWT, userPostController.deleteAccount)
 
 //POST ROUTES
