@@ -48,9 +48,9 @@ export default class UserMemoryRepository implements iUserRepository, iFunCrypto
         const actualDate = new Date()
         const newUser: iUser = {
             id: `${this.userCount}`,
-            email: email,
-            username: username,
-            password: password,
+            email,
+            username,
+            password,
             createdAt: actualDate,
             updatedAt: actualDate
         }

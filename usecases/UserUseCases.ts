@@ -23,8 +23,8 @@ export function usecaseUserProfile(id:string, userRepository:iUserRepository):iU
     USE CASE: As a user I want to be able to login
     email: string
     password: string *not encrypted
-    UserRepository: iUserRepository
-    FunCripto: iFunCrypto
+    userRepository: iUserRepository
+    cripto: iFunCrypto
 */
 export function usecaseUserLogin(email:string|null, password:string|null, userRepository:iUserRepository, crypto:iFunCrypto, utilities:iFunUtilities):Promise<string>
 {
