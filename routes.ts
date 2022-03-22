@@ -15,7 +15,7 @@ const HASH_SALT = parseInt(env.HASH_SALT) || 8
 //Dependencies
 const userRepository = new UserMemoryRepository()
 const postRepository = new PostMemoryRepository()
-const crypto = new Crypto(TOKEN_SECRET, HASH_SALT, userRepository)
+const crypto = new Crypto(TOKEN_SECRET, HASH_SALT)
 const utilities = new Utilities()
 
 //Prepare controllers with dependencies

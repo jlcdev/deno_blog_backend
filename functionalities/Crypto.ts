@@ -1,5 +1,4 @@
 import iFunCrypto from '../interfaces/iFunCrypto.ts'
-import iFunCryptoInfo from '../interfaces/iFunCryptoInfo.ts'
 import { Hash } from '../deps.ts'
 import { Bcrypt } from '../deps.ts'
 
@@ -7,12 +6,10 @@ export default class Crypto implements iFunCrypto
 {
     private secret:string
     private salt:any
-    private cryptoInfo:iFunCryptoInfo
 
-    constructor(secret:string, salt:number = 8, cryptoInfo:iFunCryptoInfo){
+    constructor(secret:string, salt:number = 8){
         this.secret = secret
         this.salt = Bcrypt.genSaltSync(salt)
-        this.cryptoInfo = cryptoInfo
     }
     private prepare_b64(data:any):string
     {
@@ -51,9 +48,7 @@ export default class Crypto implements iFunCrypto
         const verification_b64 = this.prepare_b64(verification)
 
         if(verification_b64 !== token_parts[2]) return false
-        const payload = this.restore_object(token_parts[1])
-        if(this.cryptoInfo.checkUserExist(payload.sub)) return true
-        else return false
+        return true
     }
     extractToken(token: string|null):any
     {
