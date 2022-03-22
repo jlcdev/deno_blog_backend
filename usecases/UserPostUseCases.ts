@@ -10,8 +10,11 @@ import { usecaseDeleteAllOwnerPosts } from "./PostUseCases.ts"
 */
 export function usecaseUserDeleteAccount(user_id:string, userRepository:iUserRepository, postRepository:iPostRepository):void
 {
-    usecaseDeleteAllOwnerPosts(user_id,postRepository)
-    userRepository.deleteUser(user_id)
+    const user = userRepository.getUserById(user_id)
+    if(user != null){
+        usecaseDeleteAllOwnerPosts(user_id,postRepository)
+        userRepository.deleteUser(user_id)
+    }
 }
 
 /*
