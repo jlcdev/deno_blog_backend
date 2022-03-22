@@ -65,6 +65,8 @@ export function usecaseUserRegister(email:string|null, username:string|null, pas
 */
 export function usecaseUserUpdateProfile(id:string, email:string|null, username:string|null, password:string|null, userRepository:iUserRepository):iUser
 {
+    const tokenUser = userRepository.getUserById(id)
+    if(tokenUser == null) throw new UseCaseError("you don't have permission to update")
     if(password && password.length < 6) throw new UseCaseError('Password is too short')
     const user = userRepository.updateUser(id, email, username, password)
     if(user == null) throw new UseCaseError('User not updated')
