@@ -3,10 +3,10 @@ import {
     assertNotEquals,
     assertThrows
 } from "https://deno.land/std/testing/asserts.ts"
-import UseCaseError from "../errors/UseCaseError.ts"
-import { usecaseUserRegister } from "../usecases/UserUseCases.ts"
-import UserMemoryRepository from "../repositories/UserMemoryRepository.ts"
-import Crypto from "../functionalities/Crypto.ts"
+import UseCaseError from "../../errors/UseCaseError.ts"
+import { usecaseUserRegister } from "../../usecases/UserUseCases.ts"
+import UserMemoryRepository from "../../repositories/UserMemoryRepository.ts"
+import Crypto from "../../functionalities/Crypto.ts"
 
 const userMemoryRepository = new UserMemoryRepository()
 const crypto = new Crypto('testingsecret', 8)

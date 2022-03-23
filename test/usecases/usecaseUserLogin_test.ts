@@ -2,11 +2,11 @@ import {
     assertEquals,
     assertThrows
 } from "https://deno.land/std/testing/asserts.ts"
-import UseCaseError from "../errors/UseCaseError.ts"
-import { usecaseUserLogin } from "../usecases/UserUseCases.ts"
-import UserMemoryRepository from "../repositories/UserMemoryRepository.ts"
-import Crypto from "../functionalities/Crypto.ts"
-import Utilities from "../functionalities/Utilities.ts"
+import UseCaseError from "../../errors/UseCaseError.ts"
+import { usecaseUserLogin } from "../../usecases/UserUseCases.ts"
+import UserMemoryRepository from "../../repositories/UserMemoryRepository.ts"
+import Crypto from "../../functionalities/Crypto.ts"
+import Utilities from "../../functionalities/Utilities.ts"
 
 const userMemoryRepository = new UserMemoryRepository()
 const utilities = new Utilities()
