@@ -29,7 +29,7 @@ export function usecaseUserProfile(id:string, userRepository:iUserRepository):iU
 export function usecaseUserLogin(email:string|null, password:string|null, userRepository:iUserRepository, crypto:iFunCrypto, utilities:iFunUtilities):Promise<string>
 {
     if(email == null || password == null) throw new UseCaseError('Login requires email and password')
-    if(password && password.length < 6) throw new UseCaseError('Password is too short')
+    if(password != null && password.length < 6) throw new UseCaseError('Password is too short')
     if(!utilities.validateEmail(email)) throw new UseCaseError('Invalid email')
     const user = userRepository.getUserByEmail(email)
     if(user == null) throw new UseCaseError('User not found')
