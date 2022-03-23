@@ -7,14 +7,11 @@ import UseCaseError from "../errors/UseCaseError.ts"
 import { usecaseUserRegister } from "../usecases/UserUseCases.ts"
 import UserMemoryRepository from "../repositories/UserMemoryRepository.ts"
 import Crypto from "../functionalities/Crypto.ts"
-import Utilities from "../functionalities/Utilities.ts"
 
 const userMemoryRepository = new UserMemoryRepository()
-const utilities = new Utilities()
 const crypto = new Crypto('testingsecret', 8)
 const password = crypto.hashPassword('1234567')
 
-//(email:string|null, username:string|null, password:string|null, userRepository:iUserRepository, crypto:iFunCrypto)
 Deno.test("Check if exception thrown when email is null", ()=>{
     assertThrows(()=> usecaseUserRegister(null,'fakename', '1234567', userMemoryRepository, crypto), UseCaseError)
 })
