@@ -26,7 +26,7 @@ export function usecaseUserProfile(id:string, userRepository:iUserRepository):iU
     userRepository: iUserRepository
     cripto: iFunCrypto
 */
-export function usecaseUserLogin(email:string|null, password:string|null, userRepository:iUserRepository, crypto:iFunCrypto, utilities:iFunUtilities):Promise<string>
+export function usecaseUserLogin(email:string|null, password:string|null, userRepository:iUserRepository, crypto:iFunCrypto, utilities:iFunUtilities):string
 {
     if(email == null || password == null) throw new UseCaseError('Login requires email and password')
     if(password != null && password.length < 6) throw new UseCaseError('Password is too short')
@@ -48,7 +48,7 @@ export function usecaseUserLogin(email:string|null, password:string|null, userRe
 export function usecaseUserRegister(email:string|null, username:string|null, password:string|null, userRepository:iUserRepository, crypto:iFunCrypto):iUser
 {
     if(email == null || username == null || password == null) throw new UseCaseError('Register requires email, username and password')
-    if(password && password.length < 6) throw new UseCaseError('Password is too short')
+    if(password != null && password.length < 6) throw new UseCaseError('Password is too short')
     const hashedPassword = crypto.hashPassword(password)
     const registeredUser = userRepository.insertUser(email, username, hashedPassword)
     if(registeredUser == null) throw new UseCaseError('User already exist')
