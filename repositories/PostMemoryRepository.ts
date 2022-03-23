@@ -34,6 +34,12 @@ export default class PostMemoryRepository implements iPostRepository
         return indexes
     }
 
+    clear():void
+    {
+        this.postCount = 0
+        this.posts = []
+    }
+
     getPosts():iPost[]
     {
         return this.posts
