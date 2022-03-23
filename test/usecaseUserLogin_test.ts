@@ -40,9 +40,9 @@ Deno.test("Check if exception thrown when user password isn't correct", ()=>{
     assertThrows(()=> usecaseUserLogin('fake@email.com', "1234567", userMemoryRepository, crypto, utilities), UseCaseError)
 })
 
-Deno.test("Check correct login case", async ()=>{
+Deno.test("Check correct login case", ()=>{
     userMemoryRepository.clear()
     userMemoryRepository.insertUser('fake@email.com', 'fakename', password)
-    const jwt = await usecaseUserLogin('fake@email.com', "1234567", userMemoryRepository, crypto, utilities)
+    const jwt = usecaseUserLogin('fake@email.com', "1234567", userMemoryRepository, crypto, utilities)
     assertEquals(jwt.split('.').length,3)
 })

@@ -30,7 +30,7 @@ export default class Crypto implements iFunCrypto
         const result = Bcrypt.compareSync(password, hashedPassword)
         return result
     }
-    async createToken(payload: any):Promise<string>
+    createToken(payload: any):string
     {
         const header_b64 = this.prepare_b64({alg:'HS256', typ: 'JWT'})
         const payload_b64 = this.prepare_b64(payload)
