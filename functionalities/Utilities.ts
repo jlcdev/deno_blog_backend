@@ -6,10 +6,8 @@ export default class Utilities implements iFunUtilities
 
     validateEmail(email: string|null): boolean
     {
-        if(email == null || email.length == 0) return false
-        else{
-            if(this.emailPattern.test(email)) return true
-            else return false
-        }
+        if(email == null || email.length < 5) return false
+        if(this.emailPattern.test(email)) return true
+        return false
     }
 }
