@@ -1,4 +1,4 @@
-import iFunUtilities from "../interfaces/iFunUtilities"
+import iFunUtilities from "../interfaces/iFunUtilities.ts"
 
 export default class Utilities implements iFunUtilities
 {

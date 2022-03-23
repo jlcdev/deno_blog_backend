@@ -1,8 +1,7 @@
-import iFunCryptoInfo from "../interfaces/iFunCryptoInfo.ts";
 import iUser from "../interfaces/iUser.ts";
 import iUserRepository from "../interfaces/iUserRepository.ts";
 
-export default class UserMemoryRepository implements iUserRepository, iFunCryptoInfo
+export default class UserMemoryRepository implements iUserRepository
 {
     private userCount:number
     private users:iUser[]
@@ -22,6 +21,11 @@ export default class UserMemoryRepository implements iUserRepository, iFunCrypto
         return this.users.findIndex((user:iUser)=> user.email === email)
     }
 
+    clear():void
+    {
+        this.userCount = 0
+        this.users = []
+    }
     checkUserExist(user_id:string):boolean
     {
         const index = this.findUserIndexById(user_id)
