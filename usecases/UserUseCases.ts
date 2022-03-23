@@ -63,12 +63,15 @@ export function usecaseUserRegister(email:string|null, username:string|null, pas
     password: string|null
     UserRepository: iUserRepository
 */
-export function usecaseUserUpdateProfile(id:string, email:string|null, username:string|null, password:string|null, userRepository:iUserRepository, utilities:iFunUtilities):iUser
+export function usecaseUserUpdateProfile(id:string, email:string|null, username:string|null, password:string|null, userRepository:iUserRepository, crypto: iFunCrypto, utilities:iFunUtilities):iUser
 {
     const tokenUser = userRepository.getUserById(id)
     if(tokenUser == null) throw new UseCaseError("User to update not found")
     if(email != null && !utilities.validateEmail(email)) throw new UseCaseError("Email isn't valid")
-    if(password != null && password.length < 6) throw new UseCaseError('Password is too short')
+    if(password != null){
+        if(password.length < 6) throw new UseCaseError('Password is too short')
+        password = crypto.hashPassword(password)
+    }
     const user = userRepository.updateUser(id, email, username, password)
     if(user == null) throw new UseCaseError('User not updated')
     return user
