@@ -18,7 +18,7 @@ export function usecaseGetAllPost(postRepository:iPostRepository):iPost[]
     owner_id: string
     PostRepository: iPostRepository
 */
-export function usecaseGetAllOwnerPost(owner_id:string, postRepository:iPostRepository):iPost[]
+export function usecaseGetAllOwnerPosts(owner_id:string, postRepository:iPostRepository):iPost[]
 {
     return postRepository.getPostsByOwner(owner_id)
 }

@@ -3,7 +3,7 @@ import iFunCrypto from "../interfaces/iFunCrypto.ts"
 import iPost from "../interfaces/iPost.ts"
 import iPostRepository from "../interfaces/iPostRepository.ts"
 import {
-    usecaseGetAllOwnerPost,
+    usecaseGetAllOwnerPosts,
     usecaseGetAllPost,
     usecaseCreateNewPost,
     usecaseUpdatePost,
@@ -36,7 +36,7 @@ export default function mountPostController(postRepository:iPostRepository, cryp
         },
         accountPosts: function(req:Request, res:Response){
             const payload = extractTokenPayload(req)
-            const posts: iPost[] = usecaseGetAllOwnerPost(payload.sub, postRepository)
+            const posts: iPost[] = usecaseGetAllOwnerPosts(payload.sub, postRepository)
             return res.status(200).send(JSON.stringify({
                 status: true,
                 posts
