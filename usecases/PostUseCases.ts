@@ -32,7 +32,7 @@ export function usecaseGetAllOwnerPosts(owner_id:string, postRepository:iPostRep
 */
 export function usecaseCreateNewPost(owner_id:string, title:string, content:string, postRepository:iPostRepository):iPost
 {
-    const post = postRepository.insertPost(title, content, owner_id)
+    const post = postRepository.insertPost(owner_id, title, content)
     if(post == null) throw new UseCaseError('Post not created')
     return post
 }
