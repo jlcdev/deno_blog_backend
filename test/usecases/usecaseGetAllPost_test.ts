@@ -16,7 +16,7 @@ Deno.test("Check when the database is empty if the posts list is empty", ()=>{
 
 Deno.test("Check when exist posts then posts list is not empty", ()=>{
     postMemoryRepository.clear()
-    postMemoryRepository.insertPost('faketitle', 'fakecontent', '0')
+    postMemoryRepository.insertPost('0','faketitle', 'fakecontent')
     const posts = usecaseGetAllPost(postMemoryRepository)
     assertNotEquals(posts, null)
     assertNotEquals(posts.length, 0)

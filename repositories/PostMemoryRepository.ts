@@ -16,9 +16,9 @@ export default class PostMemoryRepository implements iPostRepository
         return this.posts.findIndex((post:iPost)=> post.id === id)
     }
 
-    private findPostIndexByTitle(id:string):number
+    private findPostIndexByTitle(title:string):number
     {
-        return this.posts.findIndex((post:iPost)=> post.id === id)
+        return this.posts.findIndex((post:iPost)=> post.title === title)
     }
 
     private findAllPostsIndexByOwner(owner:string)
@@ -55,7 +55,7 @@ export default class PostMemoryRepository implements iPostRepository
         const indexes = this.findAllPostsIndexByOwner(owner)
         return indexes.map((index:number) => this.posts[index])
     }
-    insertPost(title:string, content:string, owner:string): iPost|null
+    insertPost( owner:string, title:string, content:string): iPost|null
     {
         const index = this.findPostIndexByTitle(title)
         if(index >= 0) return null
