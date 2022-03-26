@@ -55,7 +55,7 @@ export default class PostMemoryRepository implements iPostRepository
         const indexes = this.findAllPostsIndexByOwner(owner)
         return indexes.map((index:number) => this.posts[index])
     }
-    insertPost( owner:string, title:string, content:string): iPost|null
+    insertPost(owner:string, title:string, content:string): iPost|null
     {
         const index = this.findPostIndexByTitle(title)
         if(index >= 0) return null
