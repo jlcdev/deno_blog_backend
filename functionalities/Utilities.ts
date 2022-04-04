@@ -10,4 +10,10 @@ export default class Utilities implements iFunUtilities
         if(this.emailPattern.test(email)) return true
         return false
     }
+
+    validatePassword(password: string|null): boolean
+    {
+        if(password == null || password.length < 6) return false
+        return true
+    }
 }
