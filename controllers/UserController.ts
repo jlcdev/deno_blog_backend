@@ -62,7 +62,7 @@ export default function mountUserController(userRepository:iUserRepository, cryp
         register: async function(req:Request, res:Response){
             const body = await getBody(req)
             try {
-                const user:iUser = usecaseUserRegister(body.email, body.username, body.password, userRepository, crypto)
+                const user:iUser = usecaseUserRegister(body.email, body.username, body.password, userRepository, crypto, utilities)
                 return res.status(200).send(JSON.stringify({
                     status: true
                 }))

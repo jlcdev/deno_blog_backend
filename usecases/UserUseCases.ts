@@ -28,12 +28,11 @@ export function usecaseUserProfile(id:string, userRepository:iUserRepository):iU
 */
 export function usecaseUserLogin(email:string|null, password:string|null, userRepository:iUserRepository, crypto:iFunCrypto, utilities:iFunUtilities):string
 {
-    if(email == null || password == null) throw new UseCaseError('Login requires email and password')
-    if(password != null && password.length < 6) throw new UseCaseError('Password is too short')
-    if(!utilities.validateEmail(email)) throw new UseCaseError('Invalid email')
-    const user = userRepository.getUserByEmail(email)
+    if(!utilities.validateEmail(email)) throw new UseCaseError('Valid email required')
+    if(!utilities.validatePassword(password)) throw new UseCaseError('Valid email required')
+    const user = userRepository.getUserByEmail(email!)
     if(user == null) throw new UseCaseError('User not found')
-    if(!crypto.verifyPassword(password, user.password)) throw new UseCaseError('Incorrect password')
+    if(!crypto.verifyPassword(password!, user.password)) throw new UseCaseError('Incorrect password')
     return crypto.createToken({ username: user.username, sub: user.id })
 }
 
@@ -45,7 +44,7 @@ export function usecaseUserLogin(email:string|null, password:string|null, userRe
     UserRepository: iUserRepository
     FunCripto: iFunCrypto
 */
-export function usecaseUserRegister(email:string|null, username:string|null, password:string|null, userRepository:iUserRepository, crypto:iFunCrypto):iUser
+export function usecaseUserRegister(email:string|null, username:string|null, password:string|null, userRepository:iUserRepository, crypto:iFunCrypto, utilities:iFunUtilities):iUser
 {
     if(email == null || username == null || password == null) throw new UseCaseError('Register requires email, username and password')
     if(password != null && password.length < 6) throw new UseCaseError('Password is too short')
